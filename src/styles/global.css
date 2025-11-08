@@ -1,1 +1,26 @@
 @import "tailwindcss";
+
+@theme {
+    --bg-blue-50: #f1f9fe;
+    --bg-blue-100: #e3f0fb;
+    --bg-blue-200: #c0e2f7;
+    --bg-blue-300: #88ccf1;
+    --bg-blue-400: #48b2e8;
+    --bg-blue-500: #2199d6;
+    --bg-blue-600: #137ab6;
+    --bg-blue-700: #126aa1;
+    --bg-blue-800: #12537a;
+    --bg-blue-900: #144666;
+    --bg-blue-950: #0e2c43;
+}
+
+@utility bg-image {
+    background-image: url('../images/logoOrcaCode.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    width: 120px;
+    height: 120px;
+    border-radius: 10%;
+    margin: 10px;
+}
