@@ -1,0 +1,80 @@
+---
+interface Props {
+    title: string;
+}
+const { title } = Astro.props;
+---
+
+<section id="sobremi" class="mt-16 px-6 lg:px-8">
+    <!-- Encabezado mejorado -->
+    <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-950 uppercase tracking-wide">
+            {title}
+        </h2>
+        <div class="w-24 h-2 bg-gradient-to-r from-blue-300 to-blue-500 mx-auto mt-4 rounded-full"></div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-12 max-w-6xl mx-auto">
+        <!-- Texto y descripción -->
+        <div class="lg:w-1/2 space-y-8">
+            <div>
+                <h3 class="text-6xl lg:text-7xl font-black text-gray-900 uppercase leading-tight">
+                    Orca Code
+                </h3>
+                <p class="text-3xl lg:text-4xl mt-6 text-gray-700">
+                    Desarrollador <span class="text-blue-400 font-bold uppercase">FullStack</span>
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <p class="text-lg lg:text-xl leading-relaxed text-gray-600 font-medium">
+                    Soy un <strong class="text-blue-500">Desarrollador Full Stack</strong> apasionado por transformar ideas en soluciones digitales innovadoras.
+                    Mi expertise se centra en el diseño y construcción de <strong>sistemas web robustos</strong> y
+                    <strong>aplicaciones web eficientes</strong> que combinan estética moderna con máximo rendimiento.
+                </p>
+
+                <p class="text-lg lg:text-xl leading-relaxed text-gray-600 font-medium">
+                    Cada proyecto que desarrollo tiene un propósito claro: <strong>resolver problemas complejos</strong>,
+                    optimizar procesos y ofrecer experiencias de usuario excepcionales que generen valor real.
+                </p>
+
+                <p class="text-lg lg:text-xl leading-relaxed text-gray-600 font-medium">
+                    Mi crecimiento profesional continúa en expansión, actualmente inmerso en el
+                    <strong class="text-blue-500">desarrollo móvil</strong> para crear soluciones integrales
+                    que conecten eficientemente todos los dispositivos y plataformas.
+                </p>
+            </div>
+        </div>
+
+        <!-- Contenedor para icono/gráfico -->
+        <div class="lg:w-1/6 flex justify-center items-center">
+            <div class="relative">
+                    <div class="bg-[url(../images/logoOrcaCode.png)] w-[250px] h-[250px] shadow-2xl bg-cover bg-center rounded-b-3xl md:w-[500px] md:h-[500px]"></div>
+                <!-- Elementos decorativos -->
+                <div class="absolute -top-4 -right-4 w-8 h-8 bg-blue-300 rounded-full opacity-70"></div>
+                <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-blue-400 rounded-full opacity-60"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .bg-gradient-to-br {
+        background: linear-gradient(135deg, #63b3ed 0%, #4299e1 100%);
+    }
+
+    /* Efectos hover suaves */
+    .relative:hover .bg-gradient-to-br {
+        transform: scale(1.02);
+        transition: transform 0.3s ease;
+    }
+
+    /* Mejoras de responsividad */
+    @media (max-width: 768px) {
+        .px-6 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    }
+</style>
