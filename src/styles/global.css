@@ -32,3 +32,9 @@
     width: 900px;
     height: 900px;
 }
+
+@utility bg-icon {
+    background-image: url('../images/logoOrcaCode.png');
+    border-radius: 50%;
+    background-repeat: no-repeat;
+}
