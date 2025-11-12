@@ -1,0 +1,20 @@
+---
+import Title from "../shared/Title.astro";
+import CardsServices from "../shared/CardsServices.astro";
+interface Props {
+    title: string,
+}
+const { title } = Astro.props;
+---
+<section class="mt-16 px-6 lg:px-8">
+    <div>
+        <Title title="Servicios"/>
+        <p class="text-center text-2xl font-semibold">
+            En <span class="text-blue-500 uppercase font-bold">Orca Code</span>, nos especializamos en transformar tus ideas en software robusto y de alto rendimiento.
+            Nuestros servicios de desarrollo están diseñados para cubrir todas tus necesidades digitales, presentes y futuras:
+        </p>
+    </div>
+
+    <!-- SOLO el componente, SIN grid exterior -->
+    <CardsServices/>
+</section>

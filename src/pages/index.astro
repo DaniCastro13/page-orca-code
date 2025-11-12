@@ -3,6 +3,8 @@ import "../styles/global.css"
 import Navbar from "../components/Navbar.astro"
 import Home from "../components/Home.astro";
 import AboutMe from "../components/AboutMe.astro";
+import Services from "../components/Services.astro";
+import DevUtilities from "../components/DevUtilities.astro";
 ---
 
 <html lang="en">
@@ -19,6 +21,10 @@ import AboutMe from "../components/AboutMe.astro";
         <slot/>
         <Home title="Transformamos desafíos en ventajas competitivas."/>
         <slot/>
-    <AboutMe title="Sobre Mi"/>
+        <AboutMe title="Sobre Mi"/>
+        <slot/>
+        <Services title="Servicios"/>
+        <slot/>
+        <DevUtilities/>
 	</body>
 </html>
