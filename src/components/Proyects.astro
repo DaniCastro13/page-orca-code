@@ -1,0 +1,201 @@
+---
+import Title from "../shared/Title.astro";
+
+const proyectsList = [
+    {
+        title: "Dream Space Renovations",
+        category: "Landing Page",
+        description: "Una landing page diseñada específicamente para contratistas y empresas de pintura, drywall y acabados. Captura leads de clientes interesados en servicios de remodelación, pintura residencial/comercial, instalación de drywall y mucho mas.",
+        image: "/images/bg-dream-space-renovations.png",
+        link: "https://dream-space-renovation.netlify.app/",
+        tools: ["Astro", "Html", "Tailwindcss", "JavaScript", "CSS"]
+    },
+    {
+        title: "Bolsos Moritas",
+        category: "Aplicacion de Escritorio",
+        description: "Sistema de venta especializado para negocio de bolsos. Control de inventario por modelo, color y material. Gestión de clientes frecuentes, control de caja, control de ventas, control de proveedores. Ideal para comercios de moda y accesorios.",
+        image: "/images/bg-bolsos-morita.png",
+        link: "",
+        tools: ["Java", "MySQL", "MVC", "Interfaces Graficas"]
+    }
+]
+
+// Mapeo de herramientas a iconos
+const toolIcons = {
+    "Astro": "🚀",
+    "Html": "🌐",
+    "Tailwindcss": "🎨",
+    "JavaScript": "⚡",
+    "CSS": "🎯",
+    "Java": "☕",
+    "MySQL": "🐬",
+    "MVC": "🏗️",
+    "Interfaces Graficas": "💻"
+}
+---
+<section class="mt-16 px-6 lg:px-8 relative">
+    <!-- Fondo con patrón de ondas Orca -->
+    <div class="absolute inset-0 opacity-3 pointer-events-none">
+        <div class="absolute -top-20 -right-20 w-60 h-60 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20"></div>
+        <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-blue-800 rounded-full mix-blend-multiply filter blur-xl opacity-10"></div>
+    </div>
+
+    <Title title="Proyectos"/>
+    <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto leading-relaxed relative z-10 mb-8">
+        Estos son algunos de los proyectos que he desarrollado hasta el momento.
+        Cada uno representa un <span class="text-blue-600 font-semibold">compromiso con la calidad y la innovación</span>,
+        y estoy emocionado por los nuevos desafíos que vendrán.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 relative z-10">
+        <!-- Proyectos reales -->
+        {proyectsList.map((proyect) => (
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-100 overflow-hidden group relative">
+
+                    <!-- Efecto de ondas Orca en cada card -->
+                    <div class="absolute inset-0 opacity-5 pointer-events-none">
+                        <div class="absolute -top-8 -right-8 w-24 h-24 bg-blue-300 rounded-full mix-blend-multiply filter blur-lg"></div>
+                        <div class="absolute -bottom-8 -left-8 w-20 h-20 bg-blue-500 rounded-full mix-blend-multiply filter blur-lg"></div>
+                    </div>
+
+                    <!-- Imagen del proyecto -->
+                    <div class="relative overflow-hidden">
+                        <img
+                                src={proyect.image}
+                                alt={proyect.title}
+                                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div class="absolute top-4 right-4">
+                        <span class="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg border border-blue-300">
+                            {proyect.category}
+                        </span>
+                        </div>
+                        <!-- Efecto de onda sobre la imagen -->
+                        <div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent"></div>
+                    </div>
+
+                    <!-- Contenido -->
+                    <div class="p-6 relative">
+                        <!-- Título -->
+                        <h2 class="text-2xl font-bold text-gray-800 mb-3 group-hover:text-blue-700 transition-colors">
+                            {proyect.title}
+                        </h2>
+
+                        <!-- Descripción -->
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            {proyect.description}
+                        </p>
+
+                        <!-- Tecnologías utilizadas -->
+                        <div class="mb-6">
+                            <h3 class="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-3 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                                Tecnologías Utilizadas
+                            </h3>
+                            <div class="flex flex-wrap gap-2">
+                                {proyect.tools.map((tool) => (
+                                        <span class="inline-flex items-center gap-1 bg-blue-50 hover:bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 border border-blue-200">
+                                    <span class="text-lg">{toolIcons[tool]}</span>
+                                            {tool}
+                                </span>
+                                ))}
+                            </div>
+                        </div>
+
+                        <!-- Botón de acción -->
+                        <div class="flex justify-between items-center pt-4 border-t border-blue-100">
+                            {proyect.link ? (
+                                    <a
+                                            href={proyect.link}
+                                            target="_blank"
+                                            class="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2 group/btn"
+                                    >
+                                        <span>Ver Proyecto</span>
+                                        <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                        </svg>
+                                    </a>
+                            ) : (
+                                    <span class="text-blue-400 text-sm font-medium flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                </svg>
+                                Próximamente disponible
+                            </span>
+                            )}
+
+                            <div class="text-sm text-blue-500 font-medium flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                                {proyect.tools.length} tecnologías
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        ))}
+
+        <!-- Card especial "Más Proyectos en Camino" -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl shadow-xl border-2 border-dashed border-blue-300 overflow-hidden group hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center p-8 text-center">
+
+            <!-- Efecto de ondas más pronunciado -->
+            <div class="absolute inset-0 opacity-10 pointer-events-none">
+                <div class="absolute -top-12 -right-12 w-32 h-32 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl"></div>
+                <div class="absolute -bottom-12 -left-12 w-28 h-28 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl"></div>
+            </div>
+
+            <!-- Icono principal -->
+            <div class="relative z-10 mb-6">
+                <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-lg">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Contenido -->
+            <div class="relative z-10">
+                <h3 class="text-2xl font-bold text-blue-800 mb-3">Más Proyectos en Camino</h3>
+                <p class="text-blue-700 leading-relaxed mb-6">
+                    Estoy trabajando constantemente en nuevos proyectos innovadores.
+                    <span class="font-semibold">¡Pronto estarán disponibles aquí!</span>
+                </p>
+
+
+
+                <!-- Llamada a la acción -->
+                <a
+                        href="https://wa.me/525536325801?text=Hola,%20me%20interesa%20trabajar%20en%20un%20proyecto%20contigo"
+                        target="_blank"
+                        class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    ¿Tienes un proyecto?
+                </a>
+            </div>
+
+            <!-- Elementos decorativos -->
+            <div class="absolute top-4 right-4">
+                <div class="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
+            </div>
+            <div class="absolute bottom-4 left-4">
+                <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style="animation-delay: 0.3s"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .group:hover .group-hover\:scale-105 {
+        transform: scale(1.05);
+    }
+
+    .group:hover .group-hover\:text-blue-700 {
+        color: #1d4ed8;
+    }
+</style>
