@@ -6,6 +6,7 @@ import AboutMe from "../components/AboutMe.astro";
 import Services from "../components/Services.astro";
 import DevUtilities from "../components/DevUtilities.astro";
 import Proyects from "../components/Proyects.astro";
+import Testimonios from "../components/Testimonios.astro";
 ---
 
 <html lang="en">
@@ -17,7 +18,7 @@ import Proyects from "../components/Proyects.astro";
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 		<title>Orca Code</title>
 	</head>
-	<body>
+	<body class="overflow-x-hidden">
         <Navbar/>
         <slot/>
         <Home title="Transformamos desafíos en ventajas competitivas."/>
@@ -29,5 +30,7 @@ import Proyects from "../components/Proyects.astro";
         <DevUtilities/>
         <slot/>
         <Proyects/>
+        <slot/>
+        <Testimonios/>
 	</body>
 </html>
