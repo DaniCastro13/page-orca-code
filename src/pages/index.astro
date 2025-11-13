@@ -7,6 +7,7 @@ import Services from "../components/Services.astro";
 import DevUtilities from "../components/DevUtilities.astro";
 import Proyects from "../components/Proyects.astro";
 import Testimonios from "../components/Testimonios.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <html lang="en">
@@ -32,5 +33,7 @@ import Testimonios from "../components/Testimonios.astro";
         <Proyects/>
         <slot/>
         <Testimonios/>
+        <slot/>
+        <Footer/>
 	</body>
 </html>
