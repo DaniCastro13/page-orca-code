@@ -30,13 +30,13 @@ import Title from "../shared/Title.astro";
 
     <!-- Contenedor del carrusel infinito -->
     <div class="relative w-full overflow-hidden py-8">
-        <!-- Gradientes en los bordes -->
-        <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10"></div>
+        <!-- Gradientes en los bordes - Solo se muestran cuando hay testimonios -->
+        <div id="leftGradient" class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10 hidden"></div>
+        <div id="rightGradient" class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10 hidden"></div>
 
         <!-- Carrusel infinito -->
-        <div id="testimonialsCarousel" class="flex space-x-6 animate-infinite-scroll">
-            <!-- Los testimonios se cargarán aquí con JavaScript -->
+        <div id="testimonialsCarousel" class="flex space-x-6">
+            <!-- Estado vacío -->
             <div class="col-span-full text-center py-12" id="emptyState">
                 <div class="bg-blue-50 border-2 border-dashed border-blue-200 rounded-2xl p-8 max-w-md mx-auto">
                     <svg class="w-16 h-16 text-blue-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,7 +58,6 @@ import Title from "../shared/Title.astro";
     <!-- Modal para agregar testimonio -->
     <div id="testimonialModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 relative">
-
             <!-- Efecto de ondas en el modal -->
             <div class="absolute inset-0 opacity-5 pointer-events-none">
                 <div class="absolute -top-8 -right-8 w-20 h-20 bg-blue-300 rounded-full mix-blend-multiply filter blur-lg"></div>
@@ -156,6 +155,8 @@ import Title from "../shared/Title.astro";
         const submitBtn = document.getElementById('submitTestimonial');
         const carousel = document.getElementById('testimonialsCarousel');
         const emptyState = document.getElementById('emptyState');
+        const leftGradient = document.getElementById('leftGradient');
+        const rightGradient = document.getElementById('rightGradient');
 
         // Elementos del formulario
         const nameInput = document.getElementById('testimonialName');
@@ -171,24 +172,29 @@ import Title from "../shared/Title.astro";
             const saved = localStorage.getItem('orcaTestimonials');
             if (saved) {
                 testimonials = JSON.parse(saved);
-                renderTestimonials();
             }
+            renderTestimonials();
         }
 
         // Renderizar testimonios en carrusel infinito
         function renderTestimonials() {
             if (testimonials.length === 0) {
+                // Mostrar estado vacío
                 emptyState.classList.remove('hidden');
                 carousel.innerHTML = '';
                 carousel.appendChild(emptyState);
                 carousel.classList.remove('animate-infinite-scroll');
+                leftGradient.classList.add('hidden');
+                rightGradient.classList.add('hidden');
                 return;
             }
 
+            // Ocultar estado vacío y mostrar gradientes
             emptyState.classList.add('hidden');
-            carousel.classList.add('animate-infinite-scroll');
+            leftGradient.classList.remove('hidden');
+            rightGradient.classList.remove('hidden');
 
-            // Crear contenido duplicado para efecto infinito
+            // Crear contenido de testimonios
             const testimonialsHTML = testimonials.map(testimonial => `
                 <div class="flex-shrink-0 w-80 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100 p-6 group relative testimonial-card">
                     
@@ -235,20 +241,26 @@ import Title from "../shared/Title.astro";
                 </div>
             `).join('');
 
-            // Duplicar el contenido para efecto infinito (si hay suficientes testimonios)
+            // Configurar carrusel según la cantidad de testimonios
             if (testimonials.length > 2) {
+                // Para 3+ testimonios: carrusel infinito
                 carousel.innerHTML = testimonialsHTML + testimonialsHTML;
-            } else {
+                carousel.classList.add('animate-infinite-scroll');
+            } else if (testimonials.length > 0) {
+                // Para 1-2 testimonios: sin animación, centrados
                 carousel.innerHTML = testimonialsHTML;
                 carousel.classList.remove('animate-infinite-scroll');
+                carousel.classList.add('justify-center');
             }
         }
 
         // Función para eliminar testimonio (global para que funcione en los botones renderizados)
         window.deleteTestimonial = function(id) {
-            testimonials = testimonials.filter(t => t.id !== id);
-            localStorage.setItem('orcaTestimonials', JSON.stringify(testimonials));
-            renderTestimonials();
+            if (confirm('¿Estás seguro de que quieres eliminar este testimonio?')) {
+                testimonials = testimonials.filter(t => t.id !== id);
+                localStorage.setItem('orcaTestimonials', JSON.stringify(testimonials));
+                renderTestimonials();
+            }
         }
 
         // Sistema de estrellas
@@ -346,18 +358,22 @@ import Title from "../shared/Title.astro";
             }
         });
 
-        // Pausar animación al hacer hover
+        // Pausar animación al hacer hover (solo cuando hay animación)
         carousel.addEventListener('mouseenter', function() {
-            this.style.animationPlayState = 'paused';
+            if (this.classList.contains('animate-infinite-scroll')) {
+                this.style.animationPlayState = 'paused';
+            }
         });
 
         carousel.addEventListener('mouseleave', function() {
-            this.style.animationPlayState = 'running';
+            if (this.classList.contains('animate-infinite-scroll')) {
+                this.style.animationPlayState = 'running';
+            }
         });
 
         // Inicializar
         loadTestimonials();
-        setupStarRating(); // Setup inicial de estrellas
+        setupStarRating();
     });
 </script>
 
@@ -374,10 +390,18 @@ import Title from "../shared/Title.astro";
 
     .animate-infinite-scroll {
         animation: infinite-scroll 40s linear infinite;
+        display: flex;
     }
 
     .animate-infinite-scroll:hover {
         animation-play-state: paused;
+    }
+
+    /* Para 1-2 testimonios: centrado sin animación */
+    #testimonialsCarousel:not(.animate-infinite-scroll) {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
     }
 
     /* Efectos adicionales */
@@ -400,11 +424,23 @@ import Title from "../shared/Title.astro";
         #testimonialsCarousel .testimonial-card {
             width: 300px;
         }
+
+        /* En móvil, mostrar gradientes más pequeños */
+        #leftGradient, #rightGradient {
+            width: 40px;
+        }
     }
 
     @media (max-width: 640px) {
         #testimonialsCarousel .testimonial-card {
             width: 280px;
+        }
+
+        /* En móvil muy pequeño, ocultar gradientes */
+        @media (max-width: 480px) {
+            #leftGradient, #rightGradient {
+                display: none;
+            }
         }
     }
 </style>
