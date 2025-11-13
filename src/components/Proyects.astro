@@ -33,8 +33,7 @@ const toolIcons = {
     "Interfaces Graficas": "💻"
 }
 ---
-<section id="proyectos" class="mt-16 px-6 lg:px-8 relative">
-    <!-- Fondo con patrón de ondas Orca -->
+<section id="proyectos" class="mt-16 px-6 lg:px-8 relative w-full">
     <div class="absolute inset-0 opacity-3 pointer-events-none">
         <div class="absolute -top-20 -right-20 w-60 h-60 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20"></div>
         <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20"></div>
@@ -49,17 +48,12 @@ const toolIcons = {
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 relative z-10">
-        <!-- Proyectos reales -->
         {proyectsList.map((proyect) => (
                 <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-100 overflow-hidden group relative">
-
-                    <!-- Efecto de ondas Orca en cada card -->
                     <div class="absolute inset-0 opacity-5 pointer-events-none">
                         <div class="absolute -top-8 -right-8 w-24 h-24 bg-blue-300 rounded-full mix-blend-multiply filter blur-lg"></div>
                         <div class="absolute -bottom-8 -left-8 w-20 h-20 bg-blue-500 rounded-full mix-blend-multiply filter blur-lg"></div>
                     </div>
-
-                    <!-- Imagen del proyecto -->
                     <div class="relative overflow-hidden">
                         <img
                                 src={proyect.image}
@@ -71,23 +65,15 @@ const toolIcons = {
                             {proyect.category}
                         </span>
                         </div>
-                        <!-- Efecto de onda sobre la imagen -->
                         <div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent"></div>
                     </div>
-
-                    <!-- Contenido -->
                     <div class="p-6 relative">
-                        <!-- Título -->
                         <h2 class="text-2xl font-bold text-gray-800 mb-3 group-hover:text-blue-700 transition-colors">
                             {proyect.title}
                         </h2>
-
-                        <!-- Descripción -->
                         <p class="text-gray-600 leading-relaxed mb-6">
                             {proyect.description}
                         </p>
-
-                        <!-- Tecnologías utilizadas -->
                         <div class="mb-6">
                             <h3 class="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-3 flex items-center gap-2">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -104,8 +90,6 @@ const toolIcons = {
                                 ))}
                             </div>
                         </div>
-
-                        <!-- Botón de acción -->
                         <div class="flex justify-between items-center pt-4 border-t border-blue-100">
                             {proyect.link ? (
                                     <a
@@ -137,17 +121,11 @@ const toolIcons = {
                     </div>
                 </div>
         ))}
-
-        <!-- Card especial "Más Proyectos en Camino" -->
         <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl shadow-xl border-2 border-dashed border-blue-300 overflow-hidden group hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center p-8 text-center">
-
-            <!-- Efecto de ondas más pronunciado -->
             <div class="absolute inset-0 opacity-10 pointer-events-none">
                 <div class="absolute -top-12 -right-12 w-32 h-32 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl"></div>
                 <div class="absolute -bottom-12 -left-12 w-28 h-28 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl"></div>
             </div>
-
-            <!-- Icono principal -->
             <div class="relative z-10 mb-6">
                 <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-lg">
                     <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -155,18 +133,12 @@ const toolIcons = {
                     </svg>
                 </div>
             </div>
-
-            <!-- Contenido -->
             <div class="relative z-10">
                 <h3 class="text-2xl font-bold text-blue-800 mb-3">Más Proyectos en Camino</h3>
                 <p class="text-blue-700 leading-relaxed mb-6">
                     Estoy trabajando constantemente en nuevos proyectos innovadores.
                     <span class="font-semibold">¡Pronto estarán disponibles aquí!</span>
                 </p>
-
-
-
-                <!-- Llamada a la acción -->
                 <a
                         href="https://wa.me/525536325801?text=Hola,%20me%20interesa%20trabajar%20en%20un%20proyecto%20contigo"
                         target="_blank"
@@ -178,8 +150,6 @@ const toolIcons = {
                     ¿Tienes un proyecto?
                 </a>
             </div>
-
-            <!-- Elementos decorativos -->
             <div class="absolute top-4 right-4">
                 <div class="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
             </div>

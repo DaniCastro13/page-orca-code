@@ -2,8 +2,7 @@
 import Title from "../shared/Title.astro";
 ---
 
-<section class="mt-16 px-6 lg:px-8 relative" id="testimonios">
-    <!-- Fondo con patrón de ondas Orca -->
+<section class="mt-16 px-6 lg:px-8 relative w-full" id="testimonios">
     <div class="absolute inset-0 opacity-3 pointer-events-none">
         <div class="absolute -top-20 -right-20 w-60 h-60 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20"></div>
         <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20"></div>
@@ -14,8 +13,6 @@ import Title from "../shared/Title.astro";
         La satisfacción de mis clientes es mi mayor recompensa. Estas son algunas de las experiencias
         que han tenido trabajando conmigo.
     </p>
-
-    <!-- Botón para agregar testimonio -->
     <div class="text-center mb-12 relative z-10">
         <button
                 id="openTestimonialModal"
@@ -27,16 +24,11 @@ import Title from "../shared/Title.astro";
             Agregar Tu Opinión
         </button>
     </div>
-
-    <!-- Contenedor del carrusel infinito -->
     <div class="relative w-full overflow-hidden py-8">
-        <!-- Gradientes en los bordes - Solo se muestran cuando hay testimonios -->
         <div id="leftGradient" class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10 hidden"></div>
         <div id="rightGradient" class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10 hidden"></div>
 
-        <!-- Carrusel infinito -->
         <div id="testimonialsCarousel" class="flex space-x-6">
-            <!-- Estado vacío -->
             <div class="col-span-full text-center py-12" id="emptyState">
                 <div class="bg-blue-50 border-2 border-dashed border-blue-200 rounded-2xl p-8 max-w-md mx-auto">
                     <svg class="w-16 h-16 text-blue-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,25 +46,19 @@ import Title from "../shared/Title.astro";
             </div>
         </div>
     </div>
-
-    <!-- Modal para agregar testimonio -->
     <div id="testimonialModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 relative">
-            <!-- Efecto de ondas en el modal -->
             <div class="absolute inset-0 opacity-5 pointer-events-none">
                 <div class="absolute -top-8 -right-8 w-20 h-20 bg-blue-300 rounded-full mix-blend-multiply filter blur-lg"></div>
                 <div class="absolute -bottom-8 -left-8 w-16 h-16 bg-blue-500 rounded-full mix-blend-multiply filter blur-lg"></div>
             </div>
 
-            <!-- Header del modal -->
             <div class="relative z-10">
                 <h3 class="text-2xl font-bold text-gray-800 mb-2">Agregar Testimonio</h3>
                 <p class="text-gray-600 mb-6">Comparte tu experiencia trabajando conmigo</p>
             </div>
 
-            <!-- Formulario -->
             <div class="space-y-4 relative z-10">
-                <!-- Nombre -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Tu Nombre</label>
                     <input
@@ -82,8 +68,6 @@ import Title from "../shared/Title.astro";
                             placeholder="Ingresa tu nombre"
                     />
                 </div>
-
-                <!-- Servicio -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Servicio Contratado</label>
                     <select
@@ -99,8 +83,6 @@ import Title from "../shared/Title.astro";
                         <option value="Sistemas Personalizados">Sistemas Personalizados</option>
                     </select>
                 </div>
-
-                <!-- Calificación con estrellas -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Calificación</label>
                     <div class="flex gap-2" id="starRating">
@@ -111,8 +93,6 @@ import Title from "../shared/Title.astro";
                         <button type="button" data-rating="5" class="text-2xl transition-transform hover:scale-110 star-btn">☆</button>
                     </div>
                 </div>
-
-                <!-- Comentario -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Tu Experiencia</label>
                     <textarea
@@ -123,8 +103,6 @@ import Title from "../shared/Title.astro";
                     ></textarea>
                 </div>
             </div>
-
-            <!-- Botones del modal -->
             <div class="flex gap-3 mt-6 relative z-10">
                 <button
                         id="closeModal"
@@ -145,9 +123,7 @@ import Title from "../shared/Title.astro";
 </section>
 
 <script>
-    // Sistema de testimonios con JavaScript puro
     document.addEventListener('DOMContentLoaded', function() {
-        // Elementos del DOM
         const modal = document.getElementById('testimonialModal');
         const openBtn = document.getElementById('openTestimonialModal');
         const openEmptyBtn = document.getElementById('openModalEmpty');
@@ -158,16 +134,12 @@ import Title from "../shared/Title.astro";
         const leftGradient = document.getElementById('leftGradient');
         const rightGradient = document.getElementById('rightGradient');
 
-        // Elementos del formulario
         const nameInput = document.getElementById('testimonialName');
         const serviceInput = document.getElementById('testimonialService');
         const commentInput = document.getElementById('testimonialComment');
-
-        // Variables de estado
         let currentRating = 0;
         let testimonials = [];
 
-        // Cargar testimonios del localStorage
         function loadTestimonials() {
             const saved = localStorage.getItem('orcaTestimonials');
             if (saved) {
@@ -176,10 +148,8 @@ import Title from "../shared/Title.astro";
             renderTestimonials();
         }
 
-        // Renderizar testimonios en carrusel infinito
         function renderTestimonials() {
             if (testimonials.length === 0) {
-                // Mostrar estado vacío
                 emptyState.classList.remove('hidden');
                 carousel.innerHTML = '';
                 carousel.appendChild(emptyState);
@@ -189,22 +159,17 @@ import Title from "../shared/Title.astro";
                 return;
             }
 
-            // Ocultar estado vacío y mostrar gradientes
             emptyState.classList.add('hidden');
             leftGradient.classList.remove('hidden');
             rightGradient.classList.remove('hidden');
 
-            // Crear contenido de testimonios
             const testimonialsHTML = testimonials.map(testimonial => `
                 <div class="flex-shrink-0 w-80 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100 p-6 group relative testimonial-card">
-                    
-                    <!-- Efecto de ondas Orca -->
                     <div class="absolute inset-0 opacity-5 pointer-events-none">
                         <div class="absolute -top-6 -right-6 w-16 h-16 bg-blue-300 rounded-full mix-blend-multiply filter blur-lg"></div>
                         <div class="absolute -bottom-6 -left-6 w-14 h-14 bg-blue-500 rounded-full mix-blend-multiply filter blur-lg"></div>
                     </div>
 
-                    <!-- Botón eliminar -->
                     <button 
                         onclick="deleteTestimonial(${testimonial.id})"
                         class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-red-400 hover:text-red-600 z-20"
@@ -213,8 +178,6 @@ import Title from "../shared/Title.astro";
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                         </svg>
                     </button>
-
-                    <!-- Estrellas -->
                     <div class="flex gap-1 mb-4">
                         ${[1, 2, 3, 4, 5].map(star => `
                             <svg 
@@ -227,12 +190,10 @@ import Title from "../shared/Title.astro";
                         `).join('')}
                     </div>
 
-                    <!-- Comentario -->
                     <p class="text-gray-700 leading-relaxed mb-4 italic">
                         "${testimonial.comment}"
                     </p>
 
-                    <!-- Información del cliente -->
                     <div class="border-t border-blue-100 pt-4">
                         <div class="font-semibold text-blue-800">${testimonial.name}</div>
                         <div class="text-sm text-blue-600">${testimonial.service}</div>
@@ -241,20 +202,15 @@ import Title from "../shared/Title.astro";
                 </div>
             `).join('');
 
-            // Configurar carrusel según la cantidad de testimonios
             if (testimonials.length > 2) {
-                // Para 3+ testimonios: carrusel infinito
                 carousel.innerHTML = testimonialsHTML + testimonialsHTML;
                 carousel.classList.add('animate-infinite-scroll');
             } else if (testimonials.length > 0) {
-                // Para 1-2 testimonios: sin animación, centrados
                 carousel.innerHTML = testimonialsHTML;
                 carousel.classList.remove('animate-infinite-scroll');
                 carousel.classList.add('justify-center');
             }
         }
-
-        // Función para eliminar testimonio (global para que funcione en los botones renderizados)
         window.deleteTestimonial = function(id) {
             if (confirm('¿Estás seguro de que quieres eliminar este testimonio?')) {
                 testimonials = testimonials.filter(t => t.id !== id);
@@ -263,14 +219,12 @@ import Title from "../shared/Title.astro";
             }
         }
 
-        // Sistema de estrellas
         function setupStarRating() {
             const starButtons = document.querySelectorAll('.star-btn');
             starButtons.forEach(btn => {
                 btn.addEventListener('click', function() {
                     currentRating = parseInt(this.getAttribute('data-rating'));
 
-                    // Actualizar visualización de estrellas
                     starButtons.forEach((starBtn, index) => {
                         if (index < currentRating) {
                             starBtn.textContent = '⭐';
@@ -284,7 +238,6 @@ import Title from "../shared/Title.astro";
             });
         }
 
-        // Validar formulario
         function validateForm() {
             const isValid = nameInput.value.trim() &&
                 serviceInput.value &&
@@ -295,8 +248,6 @@ import Title from "../shared/Title.astro";
             submitBtn.classList.toggle('opacity-50', !isValid);
             submitBtn.classList.toggle('cursor-not-allowed', !isValid);
         }
-
-        // Agregar testimonio
         function addTestimonial() {
             const testimonial = {
                 id: Date.now(),
@@ -310,13 +261,11 @@ import Title from "../shared/Title.astro";
             testimonials.push(testimonial);
             localStorage.setItem('orcaTestimonials', JSON.stringify(testimonials));
 
-            // Limpiar formulario
             nameInput.value = '';
             serviceInput.value = '';
             commentInput.value = '';
             currentRating = 0;
 
-            // Resetear estrellas
             document.querySelectorAll('.star-btn').forEach(btn => {
                 btn.textContent = '☆';
             });
@@ -326,21 +275,17 @@ import Title from "../shared/Title.astro";
             closeModal();
         }
 
-        // Abrir modal
         function openModal() {
             modal.classList.remove('hidden');
             modal.classList.add('flex');
-            // Re-setup star rating cada vez que se abre el modal
             setTimeout(setupStarRating, 100);
         }
 
-        // Cerrar modal
         function closeModal() {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         }
 
-        // Event listeners
         openBtn.addEventListener('click', openModal);
         openEmptyBtn.addEventListener('click', openModal);
         closeBtn.addEventListener('click', closeModal);
@@ -351,14 +296,12 @@ import Title from "../shared/Title.astro";
 
         submitBtn.addEventListener('click', addTestimonial);
 
-        // Cerrar modal al hacer click fuera
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
                 closeModal();
             }
         });
 
-        // Pausar animación al hacer hover (solo cuando hay animación)
         carousel.addEventListener('mouseenter', function() {
             if (this.classList.contains('animate-infinite-scroll')) {
                 this.style.animationPlayState = 'paused';
@@ -371,14 +314,12 @@ import Title from "../shared/Title.astro";
             }
         });
 
-        // Inicializar
         loadTestimonials();
         setupStarRating();
     });
 </script>
 
 <style>
-    /* Animación de carrusel infinito */
     @keyframes infinite-scroll {
         0% {
             transform: translateX(0);
@@ -397,25 +338,21 @@ import Title from "../shared/Title.astro";
         animation-play-state: paused;
     }
 
-    /* Para 1-2 testimonios: centrado sin animación */
     #testimonialsCarousel:not(.animate-infinite-scroll) {
         justify-content: center;
         flex-wrap: wrap;
         gap: 1.5rem;
     }
 
-    /* Efectos adicionales */
     .group:hover .group-hover\:opacity-100 {
         opacity: 1;
     }
 
-    /* Asegurar que el modal esté centrado */
     #testimonialModal {
         align-items: center;
         justify-content: center;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
         .animate-infinite-scroll {
             animation-duration: 30s;
@@ -424,8 +361,6 @@ import Title from "../shared/Title.astro";
         #testimonialsCarousel .testimonial-card {
             width: 300px;
         }
-
-        /* En móvil, mostrar gradientes más pequeños */
         #leftGradient, #rightGradient {
             width: 40px;
         }
@@ -436,7 +371,6 @@ import Title from "../shared/Title.astro";
             width: 280px;
         }
 
-        /* En móvil muy pequeño, ocultar gradientes */
         @media (max-width: 480px) {
             #leftGradient, #rightGradient {
                 display: none;

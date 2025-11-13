@@ -2,18 +2,26 @@
 
 ---
 <header class="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
-    <nav class="container mx-auto px-6 py-4">
-        <div class="flex flex-col items-center justify-between md:flex-row">
-            <!-- Logo + Eslogan -->
-            <div class="flex items-baseline space-x-4">
-                <a href="#">
-                    <h1 class="text-2xl font-bold text-gray-900">ORCA CODE</h1>
-                    <span class="text-gray-600 text-sm font-medium">Sistemas de Profundidad</span>
+    <nav class="container mx-auto px-4 py-3">
+        <div class="flex items-center justify-between">
+            <!-- Logo y marca -->
+            <div class="flex items-center space-x-3">
+                <a href="#" class="flex flex-col">
+                    <h1 class="text-xl font-bold text-gray-900">ORCA CODE</h1>
+                    <span class="text-gray-600 text-xs font-medium">Sistemas de Profundidad</span>
                 </a>
             </div>
 
-            <!-- Menú de Navegación -->
-            <ul class="flex items-center space-x-8 mt-4 md:mt-0">
+            <!-- Menú hamburguesa para móviles -->
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors duration-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <!-- Menú desktop -->
+            <ul class="hidden md:flex items-center space-x-6">
                 <li><a href="#" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 border-b-2 border-blue-400 pb-1">Inicio</a></li>
                 <li><a href="#sobremi" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Sobre Mi</a></li>
                 <li><a href="#servicios" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Servicios</a></li>
@@ -21,5 +29,177 @@
                 <li><a href="#testimonios" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Testimonios</a></li>
             </ul>
         </div>
+
+        <!-- Menú móvil desplegable -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200">
+            <ul class="flex flex-col space-y-3 pt-4">
+                <li>
+                    <a href="#" class="block py-2 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition duration-300 border-l-4 border-blue-400 bg-blue-50 text-blue-600">
+                        Inicio
+                    </a>
+                </li>
+                <li>
+                    <a href="#sobremi" class="block py-2 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition duration-300">
+                        Sobre Mi
+                    </a>
+                </li>
+                <li>
+                    <a href="#servicios" class="block py-2 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition duration-300">
+                        Servicios
+                    </a>
+                </li>
+                <li>
+                    <a href="#proyectos" class="block py-2 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition duration-300">
+                        Proyectos
+                    </a>
+                </li>
+                <li>
+                    <a href="#testimonios" class="block py-2 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition duration-300">
+                        Testimonios
+                    </a>
+                </li>
+            </ul>
+        </div>
     </nav>
 </header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const body = document.body;
+
+        function toggleMobileMenu() {
+            const isOpen = mobileMenu.classList.contains('hidden');
+
+            if (isOpen) {
+                // Abrir menú
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                body.style.overflow = 'hidden'; // Prevenir scroll del body
+            } else {
+                // Cerrar menú
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                body.style.overflow = ''; // Restaurar scroll
+            }
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+        // Cerrar menú al hacer clic en un enlace
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                body.style.overflow = '';
+            });
+        });
+
+        // Cerrar menú al hacer clic fuera de él
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target) && !mobileMenu.classList.contains('hidden')) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Manejar el scroll para agregar efecto de fondo sólido
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > 50) {
+                header.classList.add('bg-white', 'shadow-lg');
+                header.classList.remove('bg-opacity-95');
+            } else {
+                header.classList.remove('shadow-lg');
+                header.classList.add('bg-opacity-95');
+            }
+
+            lastScrollY = currentScrollY;
+        });
+    });
+</script>
+
+<style>
+    /* Estilos adicionales para mejorar la experiencia móvil */
+    header {
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.95);
+        transition: all 0.3s ease;
+    }
+
+    #mobile-menu {
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+
+    /* Smooth transitions */
+    #mobile-menu {
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Mejorar accesibilidad táctil */
+    @media (max-width: 768px) {
+        #mobile-menu a {
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
+
+        #mobile-menu-button {
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    /* Animación suave para el menú desplegable */
+    #mobile-menu {
+        animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Efecto hover mejorado para desktop */
+    @media (min-width: 768px) {
+        nav ul li a {
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        nav ul li a:not(.border-blue-400)::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #2563eb; /* blue-600 */
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+    }
+</style>

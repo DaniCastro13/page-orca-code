@@ -33,20 +33,15 @@ const imagesServices = [
     }
 ];
 ---
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10 w-full">
     {imagesServices.map((image) => (
             <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden group relative">
-
-                <!-- Patrón de ondas Orca en el fondo -->
                 <div class="absolute inset-0 opacity-5">
                     <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl"></div>
                     <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-700 rounded-full mix-blend-multiply filter blur-xl"></div>
                     <div class="absolute top-20 right-20 w-32 h-32 bg-blue-900 rounded-full mix-blend-multiply filter blur-xl"></div>
                 </div>
-
-                <!-- Header con efecto ola -->
                 <div class="relative bg-gradient-to-r from-blue-800 to-blue-600 p-6 text-white overflow-hidden">
-                    <!-- Onda decorativa -->
                     <div class="absolute bottom-0 left-0 right-0">
                         <svg viewBox="0 0 100 20" class="w-full h-4 text-white">
                             <path d="M0,10 C20,0 40,20 60,10 C80,0 100,20 100,10 L100,20 L0,20 Z" fill="currentColor"/>
@@ -54,8 +49,6 @@ const imagesServices = [
                     </div>
                     <h3 class="text-xl font-bold text-center relative z-10">{image.title}</h3>
                 </div>
-
-                <!-- Imagen con marco de onda -->
                 <div class="p-4 relative">
                     <div class="relative overflow-hidden rounded-xl border-2 border-blue-100">
                         <img
@@ -63,18 +56,13 @@ const imagesServices = [
                                 alt={image.title}
                                 class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                         />
-                        <!-- Efecto de onda en esquina de imagen -->
                         <div class="absolute top-2 right-2 w-8 h-8 bg-blue-500 rounded-full opacity-20"></div>
                         <div class="absolute bottom-2 left-2 w-6 h-6 bg-blue-700 rounded-full opacity-30"></div>
                     </div>
                 </div>
-
-                <!-- Descripción -->
                 <div class="p-6 relative z-10">
                     <p class="text-gray-700 leading-relaxed text-justify">{image.description}</p>
                 </div>
-
-                <!-- Botón WhatsApp verde -->
                 <div class="px-6 pb-6 relative">
                     <a
                             href=`https://wa.me/525536325801?text=Hola,%20me%20interesa%20el%20servicio%20de%20${image.title}`
